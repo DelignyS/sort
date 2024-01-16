@@ -4,6 +4,7 @@ import bubbleSort from './bubblesort.js';
 import insertionSort from './insertionsort.js';
 import selectionSort from './selectionsort.js';
 import quickSort from './quicksort.js';
+import mergeSort from './mergesort.js';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -14,7 +15,7 @@ rl.question('Please enter the name of the file to sort: ', async (fileName) => {
     try {
         const data = await fs.readFile(fileName, 'utf8');
         let numbers = data.split(' ').map(Number);
-        rl.question('Which sorting algorithm do you want to use? (bubble/insertion/selection/quick) ', (algorithm) => {
+        rl.question('Which sorting algorithm do you want to use? (bubble/insertion/selection/quick/merge) ', (algorithm) => {
             let result;
             if (algorithm === 'bubble') {
                 result = bubbleSort(numbers);
@@ -28,8 +29,11 @@ rl.question('Please enter the name of the file to sort: ', async (fileName) => {
             else if (algorithm === 'quick') {
                 result = quickSort(numbers);
             }
+            else if (algorithm === 'merge') {
+                result = mergeSort(numbers);
+            }
             else {
-                console.log('Unknown algorithm. Please enter either "bubble", "insertion", "selection", or "quick".');
+                console.log('Unknown algorithm. Please enter either "bubble", "insertion", "selection", "quick" or "merge".');
                 rl.close();
                 return;
             }
